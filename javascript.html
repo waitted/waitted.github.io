@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Portfolio</title>
+	<link rel="shortcut icon" href="logo.png">
+	<meta name="description" content="Portolio" />
+	<meta name="keywords" content="portfolio" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="stylej.css" type="text/css" />
+
+<script type="text/javascript">
+var licznik=0;
+var flaga=false;
+var aktywuj=true;
+var grafika="<img src=\"rysunek_001.png\">";
+var grafika1="<img src=\"rysunek_002.png\">";
+function pierwsza_klatka()
+{
+document.getElementById("kino").innerHTML=grafika;
+}
+function druga()
+{
+document.getElementById("kino").innerHTML=grafika1;
+flaga=true;
+}
+function nowa_klatka()
+{
+if (flaga==true)
+{
+if (licznik>5) licznik=0;licznik++;
+grafika="<img src=\"rysunek_0"+licznik+".png\">";
+document.getElementById("kino").innerHTML=grafika;
+czas=setTimeout("nowa_klatka()",1000/formularz.lista.value);
+}
+}
+function animacja_start()
+{
+if (aktywuj==true)
+{
+
+flaga=true;
+nowa_klatka();
+};
+aktywuj=false;
+}
+function animacja_stop()
+{
+flaga=false;
+aktywuj=false;
+}
+</script>
+<script type="text/javascript">
+
+function sprawdz1()
+{
+document.getElementById("odpowiedz").innerHTML = "";
+var liczba = document.getElementById("pole1").value;
+var liczba2= parseInt(liczba);
+var odpowiedz = "";
+var flaga=false;
+if (liczba2 < 1 || liczba2 > 999) document.getElementById("odpowiedz").innerHTML="Liczba nie mieści się w podanym zakresie. Wprowadź liczbę z zakresu od 1 do 999.";
+else 
+{
+for (var i=0; i<liczba.length; i++)
+{
+if (liczba.charAt(i)=="1") odpowiedz="jeden";
+else if (liczba.charAt(i)=="2") odpowiedz="dwa";
+else if (liczba.charAt(i)=="3") odpowiedz="trzy";
+else if (liczba.charAt(i)=="4") odpowiedz="cztery";
+else if (liczba.charAt(i)=="5") odpowiedz="pięć";
+else if (liczba.charAt(i)=="6") odpowiedz="sześć";
+else if (liczba.charAt(i)=="7") odpowiedz="siedem";
+else if (liczba.charAt(i)=="8") odpowiedz="osiem";
+else if (liczba.charAt(i)=="9") odpowiedz="dziewięć";
+else if (liczba.charAt(i)=="0") odpowiedz="zero";
+
+if (i!=liczba.length-1) odpowiedz += "-"
+
+document.getElementById("odpowiedz").innerHTML += odpowiedz;
+};
+}
+}
+function reset()
+{
+document.getElementById("odpowiedz").innerHTML = "";
+document.getElementById("pole1").value = "";
+}
+</script>
+
+
+
+</head>
+	
+<body onload="pierwsza_klatka()">
+
+	<div id="container">
+		 <div id="menu">
+				<div class="option"><a href="glowna.html">o mnie</a> </div>
+				<div class="option"><a href="gimp.html">gimp</a> </div>
+				<div class="option"><a href="javascript.html">javascript</a> </div> 
+				<div class="option"><a href="blender.html">blender</a> </div> 
+				<div class="option"><a href="inkscape.html">inkscape</a> </div> 
+
+			</div>
+		
+		<div id="text">
+
+			<div class="podpis">"Obliczanie BMI"</div>
+			<div class="podpis">"Lot Ptaka"</div>
+			<div style="clear:both;"></div>
+			
+			<div class="kod">
+			<form name="ankieta">
+
+ <p> Masa ciała = <input type="text" name="masa">  [kg]</p>
+ <p> Wzrost = <input type="text" name="wzrost">  [m] </p> 
+     </select>
+  BMI = <input type="text" name="bmi" readonly><br><br>
+  Twoje BMI wskazuje na <input type="text" name="diag" readonly><br><br>
+   <input type="button" value="Oblicz" onClick="sprawdz()">&nbsp<input type="reset" value="Resetuj"><br><br>
+</form>
+<img src="Niemcewiczbmi.jpg"><br>
+<script language="javascript">
+
+function sprawdz()
+{
+var pole1=ankieta.masa.value; pole2=ankieta.wzrost.value
+
+if (pole1!="" && pole2!="") { 
+ankieta.bmi.value = (pole1/(pole2*pole2)).toFixed(2); 
+}
+var pole3=ankieta.bmi.value
+if (pole3<18.5) {
+ankieta.diag.value="niedowagę";
+}
+else if (pole3>=18.5 && pole3<25) {
+ankieta.diag.value="zdrową wagę";
+}
+else if (pole3>=25 && pole3<30) {
+ankieta.diag.value="nadwagę";
+}
+else if (pole3>=30 && pole3<35) {
+ankieta.diag.value="otyłość";
+}
+else {
+ankieta.diag.value="otyłość kliniczną";
+}
+}
+</script>
+			</div>
+			<div class="kod">
+			<table>
+
+<tr><div id="kino"></div></tr>
+<tr>
+<form name="formularz">
+<select name="lista"
+    onCharge="wybierz(lista.selectedIndex)"
+    size="1">
+    <option value="15">15 fps</option>
+    <option value="10">10 fps</option>
+    <option value="5">5 fps</option>
+    <option value="1">1 fps</option>
+</select>
+</form>
+<br><br>
+<input type="submit" value="Start" onclick="animacja_start()">&nbsp
+<input type="submit" value="Stop" onclick="animacja_stop()">
+</tr>
+</table>
+</table>
+			</div>
+			<div style="clear:both;"></div>
+			</br>
+			<div id="v1"></div>
+
+			<hr color="black" size="1px" width="1500px">
+			<div class="podpis">"Obliczanie VAT"</div>
+			<div class="podpis">"Zamiana na tekst"</div>
+			<div style="clear:both;"></div>
+			
+			<div class="kod">
+<img src="brutto_netto.png"><br>
+<form name="ankieta3">
+ <input type="text" name="netto"> 
+     <select name="vat">
+      <option value="0">0</option>	
+      <option value="5">5</option>
+      <option value="8">8</option>
+      <option value="23">23</option>
+     </select>
+<input type="text" name="brutto" readonly> <br><br>
+  <input type="button" value="Oblicz" onClick="sprawdz3()">
+  <input type="reset" value="Kasuj">
+</form>
+</br>
+<img src="netto_brutto.png"><br>
+<form name="ankieta2">
+ <input type="text" name="brutto2"> 
+     <select name="vat2">
+      <option value="0">0</option>	
+      <option value="5">5</option>
+      <option value="8">8</option>
+      <option value="23">23</option>
+     </select>
+<input type="text" name="netto2" readonly> <br><br>
+  <input type="button" value="Oblicz" onClick="sprawdz2()">
+  <input type="reset" value="Kasuj">
+</form>
+<script language="javascript">
+function sprawdz3()
+{
+var pole1=ankieta3.netto.value; pole2=ankieta3.vat.value
+
+if (pole1!="")
+{ ankieta3.brutto.value = pole1*(1 + pole2 / 100) }
+}
+function sprawdz2()
+{
+var pole3=ankieta2.brutto2.value; pole4=ankieta2.vat2.value
+
+if (pole3!="")
+{ ankieta2.netto2.value = (pole3/(1+pole4/100)).toFixed(2) }
+}
+</script>
+			</div>
+		
+			<div class="kod">
+			<p>Wpisz liczbę z zakresu od 1 do 999 <input type="text" id="pole1"></p>
+<p id="odpowiedz"></p>
+
+<input type="submit" value="Pokaż słownie" onclick="sprawdz1()"/> 
+<input type="reset" value="Reset" onclick="reset()"/>
+			</div>
+			
+			
+		</div>
+
+		<div id="v2"></div>
+	</div>
+			<div id="footer">&copy; copyright niemcewicz corporation</div>
+
+</body>
+</html>
